@@ -1,10 +1,10 @@
-import { Icons } from "../../public/assets/icons";
+import { Icons } from "../assets/icons";
 import { useState } from "react";
 import { type TaskProps } from "../App";
 
 interface TaskComponentProps {
   task: TaskProps;
-  darkTheme: boolean
+  darkTheme: boolean;
 }
 
 export default function Task({ task, darkTheme }: TaskComponentProps) {
@@ -31,7 +31,9 @@ export default function Task({ task, darkTheme }: TaskComponentProps) {
           {task.concluded ? <Icons.Checkmark /> : ""}
         </button>
         <button
-          className={`${darkTheme ? "text-white" : "text-black"} text-[24px] hover:cursor-pointer duration-1000`}
+          className={`${
+            darkTheme ? "text-white" : "text-black"
+          } text-[24px] hover:cursor-pointer duration-1000`}
           onClick={() => onTaskClick(showTaskDetails)}
         >
           {task.title}
@@ -42,9 +44,23 @@ export default function Task({ task, darkTheme }: TaskComponentProps) {
           showTaskDetails ? "" : "hidden"
         }`}
       >
-        <p className={`${darkTheme? "text-white" : "text-black"} duration-1000 overflow-x-hidden w-full h-fit outline-0`}>{task.description}</p>
+        <p
+          className={`${
+            darkTheme ? "text-white" : "text-black"
+          } duration-1000 overflow-x-hidden w-full h-fit outline-0`}
+        >
+          {task.description}
+        </p>
         <div className="flex items-center justify-center">
-          <button className={`${darkTheme? "text-red-400 hover:text-red-600" : "text-red-700 hover:text-red-400"} duration-1000 text-[12px] hover:cursor-pointer`}>Delete Task</button>
+          <button
+            className={`${
+              darkTheme
+                ? "text-red-400 hover:text-red-600"
+                : "text-red-700 hover:text-red-400"
+            } duration-1000 text-[12px] hover:cursor-pointer`}
+          >
+            Delete Task
+          </button>
         </div>
       </div>
       <hr className="text-gray border-1" />

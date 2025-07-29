@@ -71,7 +71,7 @@ export const Icons = {
       />
     </svg>
   ),
-  Plus: ({ width = "24px", height = "24px" }) => (
+  Plus: ({ width = "32px", height = "32px" }) => (
     <svg
       width={width}
       height={height}
