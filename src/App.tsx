@@ -7,7 +7,6 @@ import { Icons } from "./assets/icons";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Tasks from "./components/Tasks";
-import { getTasks } from "./services/taskService";
 
 // Services
 
@@ -25,18 +24,7 @@ function App() {
   const [darkTheme, setDarkTheme] = useState(false);
 
   const tasks: TaskType[] = [
-    {
-      id: 1,
-      title: "Título teste",
-      description: "Essa é uma descrição teste só pra eu ver como é que fica",
-      concluded: false,
-    },
-    {
-      id: 2,
-      title: "Título teste",
-      description: "Essa é uma descrição teste só pra eu ver como é que fica",
-      concluded: false,
-    },
+    
   ];
 
   return (

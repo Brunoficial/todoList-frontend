@@ -33,7 +33,7 @@ export default function Task({ task, darkTheme }: TaskComponentProps) {
         <button
           className={`${
             darkTheme ? "text-white" : "text-black"
-          } text-[24px] hover:cursor-pointer duration-1000`}
+          } text-[24px] hover:cursor-pointer duration-1000 font-poppins`}
           onClick={() => onTaskClick(showTaskDetails)}
         >
           {task.title}
@@ -47,7 +47,7 @@ export default function Task({ task, darkTheme }: TaskComponentProps) {
         <p
           className={`${
             darkTheme ? "text-white" : "text-black"
-          } duration-1000 overflow-x-hidden w-full h-fit outline-0`}
+          } duration-1000 overflow-x-hidden w-full h-fit outline-0 font-poppins`}
         >
           {task.description}
         </p>
