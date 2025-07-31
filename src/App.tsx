@@ -1,16 +1,17 @@
 // Componentes
 import Title from "./components/Title";
 import TopBar from "./components/TopBar";
-import Task from "./components/Task";
 import { Icons } from "./assets/icons";
 
 // React
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Tasks from "./components/Tasks";
+import { getTasks } from "./services/taskService";
 
 // Services
 
-export interface TaskProps {
+export interface TaskType {
   id: number;
   title: string;
   description: string;
@@ -23,27 +24,20 @@ function App() {
   const [serchValue, setSearchValue] = useState("");
   const [darkTheme, setDarkTheme] = useState(false);
 
-  const task: TaskProps = {
-    id: 1,
-    title: "Título teste",
-    description: "Essa é uma descrição teste só pra eu ver como é que fica",
-    concluded: false,
-  };
-
-  const task2: TaskProps = {
-    id: 2,
-    title: "Estudar pra java",
-    description: "Java é meio chatinho, mas é legal",
-    concluded: false,
-  };
-
-  const task3: TaskProps = {
-    id: 3,
-    title: "Estudar pra java",
-    description: "Java é meio chatinho, mas é legal",
-    concluded: false,
-  };
-
+  const tasks: TaskType[] = [
+    {
+      id: 1,
+      title: "Título teste",
+      description: "Essa é uma descrição teste só pra eu ver como é que fica",
+      concluded: false,
+    },
+    {
+      id: 2,
+      title: "Título teste",
+      description: "Essa é uma descrição teste só pra eu ver como é que fica",
+      concluded: false,
+    },
+  ];
 
   return (
     <div
@@ -63,11 +57,8 @@ function App() {
           darkTheme={darkTheme}
           setDarkTheme={setDarkTheme}
         />
-        <div className="tasks max-h-[840px] overflow-auto flex flex-col w-full px-12 gap-y-5 overflow-y-auto">
-          <Task task={task} darkTheme={darkTheme} />
-          <Task task={task2} darkTheme={darkTheme} />
-          <Task task={task3} darkTheme={darkTheme} />
-        </div>
+        <Tasks tasks={tasks} />
+
         <button
           onClick={() => navigate("/addTask")}
           className={`${

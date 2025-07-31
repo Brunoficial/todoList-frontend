@@ -1,6 +1,6 @@
 import type { ReactNode } from "react"
 
-type TitleProps = {
+interface TitleProps {
     children: ReactNode;
     darkTheme: boolean
 }

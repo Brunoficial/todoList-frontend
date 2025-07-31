@@ -1,9 +1,9 @@
 import { Icons } from "../assets/icons";
 import { useState } from "react";
-import { type TaskProps } from "../App";
+import { type TaskType } from "../App";
 
 interface TaskComponentProps {
-  task: TaskProps;
+  task: TaskType;
   darkTheme: boolean;
 }
 
@@ -40,7 +40,7 @@ export default function Task({ task, darkTheme }: TaskComponentProps) {
         </button>
       </div>
       <div
-        className={`task-details px-2 duration-1000 ${
+        className={`task-details flex flex-col gap-y-4 px-2 duration-1000 ${
           showTaskDetails ? "" : "hidden"
         }`}
       >
@@ -51,15 +51,23 @@ export default function Task({ task, darkTheme }: TaskComponentProps) {
         >
           {task.description}
         </p>
-        <div className="flex items-center justify-center">
+        <div className="flex items-center gap-2 text-[12px]">
           <button
             className={`${
               darkTheme
-                ? "text-red-400 hover:text-red-600"
-                : "text-red-700 hover:text-red-400"
+                ? "text-lightThemeEmphasis hover:text-red-600"
+                : "text-lightThemeEmphasis hover:text-red-400"
             } duration-1000 text-[12px] hover:cursor-pointer`}
           >
-            Delete Task
+            Delete
+          </button>
+          <p>/</p>
+          <button className={`${
+              darkTheme
+                ? "text-lightThemeEmphasis hover:text-red-600"
+                : "text-lightThemeEmphasis hover:text-yellow-400"
+            } duration-1000 text-[12px] hover:cursor-pointer`}>
+            Edit
           </button>
         </div>
       </div>
