@@ -1,6 +1,6 @@
 import { Icons } from "../assets/icons/index";
 
-type TopBarProps = {
+interface TopBarProps {
   searchValue: string;
   setSearchValue: React.Dispatch<React.SetStateAction<string>>;
   darkTheme: boolean;

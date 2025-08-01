@@ -1,15 +1,18 @@
-// Componentes
+// Components
 import Title from "./components/Title";
 import TopBar from "./components/TopBar";
+import Tasks from "./components/Tasks";
+
+// Assets
 import { Icons } from "./assets/icons";
 
 // React
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Tasks from "./components/Tasks";
-import { getReq } from "./services/apiService";
+
 
 // Services
+import { getReq } from "./services/apiService";
 
 export interface TaskType {
   id: number;

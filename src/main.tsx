@@ -3,7 +3,8 @@ import { createRoot } from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './index.css'
 import App from './App.tsx'
-import AddTask from './pages/AddTaskPage.tsx'
+import AddTaskPage from './pages/AddTaskPage.tsx'
+import EditTaskPage from './pages/EditTaskPage.tsx'
 
 
 const router = createBrowserRouter([
@@ -13,7 +14,11 @@ const router = createBrowserRouter([
   },
   {
     path:"/addTask",
-    element: <AddTask/> 
+    element: <AddTaskPage/> 
+  },
+  {
+    path: "/edit",
+    element: <EditTaskPage/>,
   }
 ])
 

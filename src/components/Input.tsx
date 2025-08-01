@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-type InputProps = {
+interface InputProps {
   child: ReactNode;
   value: string;
   setValue: React.Dispatch<React.SetStateAction<string>>;

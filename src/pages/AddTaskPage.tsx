@@ -3,6 +3,7 @@ import { Icons } from "../assets/icons";
 import Title from "../components/Title";
 import Input from "../components/Input";
 import { useState } from "react";
+import { createReq } from "../services/apiService";
 
 export default function AddTaskPage() {
   const navigate = useNavigate();
@@ -10,15 +11,27 @@ export default function AddTaskPage() {
   const [description, setDescription] = useState("");
 
   function onAddClick() {
-    setDescription("");
-    setTitle("");
+    if (title == "") {
+      alert("You must write a title for your task");
+    } else {
+
+      const body = {
+        title: title,
+        description: description,
+        concluded: false,
+      };
+
+      createReq("tasks/create", body);
+      setDescription("");
+      setTitle("");
+    }
   }
   return (
     <div className="bg-lightThemebody flex flex-col items-center py-24 px-4 w-screen h-screen">
       <div className="relative bg-white flex flex-col items-center h-[516px] w-fit rounded-[4px] py-10 px-25 shadow-2xl">
         <Title darkTheme={false}>Create a task</Title>
         <div className="flex flex-col gap-5 mb-6">
-          <Input value={title} setValue={setTitle} child="Titulo: " />
+          <Input value={title} setValue={setTitle} child="Title: " />
           <Input
             value={description}
             setValue={setDescription}

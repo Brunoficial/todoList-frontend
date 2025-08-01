@@ -13,7 +13,7 @@ export async function getReq(url:string) {
   }
 }
 
-export async function createReq(url:string, data:TaskType) {
+export async function createReq(url:string, data:any) {
 
   try {
     const response = await api.post(url, {
@@ -28,7 +28,17 @@ export async function createReq(url:string, data:TaskType) {
   }
 }
 
-// Precisa ter o parâmetro Id nessa url 
+// This url needs an Id as a parameter
+export async function getByIdReq(url:string) {
+  try {
+    const response = await api.get(url);
+    return response.data
+  } catch(error) {
+    return error
+  }
+}
+
+// This url needs to have Id as a parameter
 export async function deleteReq(url:string) {
 
   try {
@@ -40,8 +50,8 @@ export async function deleteReq(url:string) {
   }
 }
 
-// Precisa ter o parâmetro Id nessa url 
-export async function updateReq(url:string, data:TaskType) {
+// This url needs to have Id as a parameter
+export async function updateReq(url:string, data:any) {
 
   try {
     const response = await api.patch(url, {
