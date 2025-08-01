@@ -1,19 +1,19 @@
-import type { TaskType } from "../App";
+import type { AxiosResponse } from "axios";
 import api from "./api";
 
 
-export async function getReq(url:string) {
+export async function getReq(url:string): Promise<AxiosResponse> {
 
   try {
     const response = await api.get(url);
-    return response.data
+    return response
 
   } catch (error) {
     return error;
   }
 }
 
-export async function createReq(url:string, data:any) {
+export async function createReq(url:string, data:any): Promise<AxiosResponse> {
 
   try {
     const response = await api.post(url, {
@@ -29,17 +29,17 @@ export async function createReq(url:string, data:any) {
 }
 
 // This url needs an Id as a parameter
-export async function getByIdReq(url:string) {
+export async function getByIdReq(url:string): Promise<AxiosResponse> {
   try {
     const response = await api.get(url);
-    return response.data
+    return response
   } catch(error) {
     return error
   }
 }
 
 // This url needs to have Id as a parameter
-export async function deleteReq(url:string) {
+export async function deleteReq(url:string): Promise<AxiosResponse> {
 
   try {
     const response = await api.delete(url)
@@ -51,7 +51,7 @@ export async function deleteReq(url:string) {
 }
 
 // This url needs to have Id as a parameter
-export async function updateReq(url:string, data:any) {
+export async function updateReq(url:string, data:any): Promise<AxiosResponse> {
 
   try {
     const response = await api.patch(url, {

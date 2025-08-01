@@ -29,9 +29,10 @@ function App() {
   const [tasks, setTasks] = useState<TaskType[]>([]);
   useEffect(() => {
     async function fetchTasks() {
-      const data = await getReq("tasks/list");
-
-      setTasks(data);
+      const {data, status} = await getReq("tasks/list");
+      if (status==200) {
+        setTasks(data);
+      }
     } 
 
     fetchTasks();
