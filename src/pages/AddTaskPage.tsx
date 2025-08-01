@@ -11,10 +11,7 @@ export default function AddTaskPage() {
   const [description, setDescription] = useState("");
 
   function onAddClick() {
-    if (title == "") {
-      alert("You must write a title for your task");
-    } else {
-
+    if (title.trim() !== "") {
       const body = {
         title: title,
         description: description,
@@ -24,7 +21,10 @@ export default function AddTaskPage() {
       createReq("tasks/create", body);
       setDescription("");
       setTitle("");
+    } else {
+      alert("You must write a title for your task"); 
     }
+    
   }
   return (
     <div className="bg-lightThemebody flex flex-col items-center py-24 px-4 w-screen h-screen">
