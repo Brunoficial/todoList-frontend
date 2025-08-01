@@ -3,7 +3,6 @@ import api from "./api";
 
 
 export async function getReq(url:string): Promise<AxiosResponse> {
-
   try {
     const response = await api.get(url);
     return response
@@ -14,7 +13,6 @@ export async function getReq(url:string): Promise<AxiosResponse> {
 }
 
 export async function createReq(url:string, data:any): Promise<AxiosResponse> {
-
   try {
     const response = await api.post(url, {
       title: data.title,
@@ -40,7 +38,6 @@ export async function getByIdReq(url:string): Promise<AxiosResponse> {
 
 // This url needs to have Id as a parameter
 export async function deleteReq(url:string): Promise<AxiosResponse> {
-
   try {
     const response = await api.delete(url)
     return response
@@ -52,7 +49,6 @@ export async function deleteReq(url:string): Promise<AxiosResponse> {
 
 // This url needs to have Id as a parameter
 export async function updateReq(url:string, data:any): Promise<AxiosResponse> {
-
   try {
     const response = await api.patch(url, {
       title: data.title,

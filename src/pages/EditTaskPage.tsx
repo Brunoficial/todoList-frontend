@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import type { TaskType } from "../App";
 
 // API
-import { getByIdReq } from "../services/apiService";
+import { getByIdReq, updateReq } from "../services/apiService";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 // Components
@@ -14,6 +14,7 @@ import Input from "../components/Input";
 
 // Icons
 import { Icons } from "../assets/icons";
+import type { AxiosResponse } from "axios";
 
 export default function EditTaskPage() {
   const [title, setTitle] = useState("");
@@ -22,13 +23,22 @@ export default function EditTaskPage() {
   const navigate = useNavigate();
   const [task, setTask] = useState<TaskType | null>(null);
 
+  async function OnEditClick(id: number):Promise<AxiosResponse> {
+    const body = {
+      title: title,
+      description: description,
+      concluded: task?.concluded
+    }
+    const response = await updateReq(`tasks/update/${id}`, body)
+    return response
+  }
+
   useEffect(() => {
     async function fetchTask() {
       const idParam = searchParams.get("id");
       const {data, status} = await getByIdReq(`tasks/listById/${idParam}`);
 
       if (status === 200) {
-        console.log(data)
         setTask(data);
       } 
     }
@@ -55,7 +65,9 @@ export default function EditTaskPage() {
               child="Description: "
             />
           </div>
-          <button className="bg-lightThemeEmphasis hover:bg-black duration-300 hover:cursor-pointer text-white font-bold shadow-2xl px-4 py-1 rounded-[8px] ">
+          <button 
+            onClick={() => OnEditClick(task.id)}
+            className="bg-lightThemeEmphasis hover:bg-black duration-300 hover:cursor-pointer text-white font-bold shadow-2xl px-4 py-1 rounded-[8px] ">
             Edit
           </button>
           <button
