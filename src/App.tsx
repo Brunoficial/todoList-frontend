@@ -4,9 +4,10 @@ import TopBar from "./components/TopBar";
 import { Icons } from "./assets/icons";
 
 // React
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Tasks from "./components/Tasks";
+import { getReq } from "./services/apiService";
 
 // Services
 
@@ -19,13 +20,19 @@ export interface TaskType {
 
 function App() {
   const navigate = useNavigate();
-
   const [serchValue, setSearchValue] = useState("");
   const [darkTheme, setDarkTheme] = useState(false);
 
-  const tasks: TaskType[] = [
-    
-  ];
+  const [tasks, setTasks] = useState<TaskType[]>([]);
+  useEffect(() => {
+    async function fetchTasks() {
+      const data = await getReq("tasks/list");
+
+      setTasks(data);
+    } 
+
+    fetchTasks();
+  }, [tasks]);
 
   return (
     <div
@@ -45,7 +52,7 @@ function App() {
           darkTheme={darkTheme}
           setDarkTheme={setDarkTheme}
         />
-        <Tasks tasks={tasks} />
+        <Tasks tasks={tasks} darkTheme={darkTheme} />
 
         <button
           onClick={() => navigate("/addTask")}

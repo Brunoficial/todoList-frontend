@@ -1,6 +1,7 @@
 import { Icons } from "../assets/icons";
 import { useState } from "react";
 import { type TaskType } from "../App";
+import { deleteReq, updateReq } from "../services/apiService";
 
 interface TaskComponentProps {
   task: TaskType;
@@ -53,6 +54,7 @@ export default function Task({ task, darkTheme }: TaskComponentProps) {
         </p>
         <div className="flex items-center gap-2 text-[12px]">
           <button
+            onClick={() => deleteReq(`tasks/delete/${task.id}`)}
             className={`${
               darkTheme
                 ? "text-lightThemeEmphasis hover:text-red-600"
@@ -62,7 +64,8 @@ export default function Task({ task, darkTheme }: TaskComponentProps) {
             Delete
           </button>
           <p>/</p>
-          <button className={`${
+          <button 
+            className={`${
               darkTheme
                 ? "text-lightThemeEmphasis hover:text-red-600"
                 : "text-lightThemeEmphasis hover:text-yellow-400"
