@@ -16,6 +16,7 @@ import Input from "../components/Input";
 import { Icons } from "../assets/icons";
 import type { AxiosResponse } from "axios";
 import { fetchItem } from "../utils";
+import type { TaskToSend } from "./AddTaskPage";
 
 export default function EditTaskPage() {
   const [title, setTitle] = useState("");
@@ -24,23 +25,28 @@ export default function EditTaskPage() {
   const navigate = useNavigate();
   const [task, setTask] = useState<TaskType | null>(null);
 
-  async function OnEditClick(id: number): Promise<AxiosResponse | void>{
+  async function OnEditClick(id: number): Promise<AxiosResponse | void> {
     if (title.trim() !== "") {
-      const body = {
-        title: title,
-        description: description,
-        concluded: task?.concluded,
-      };
-      const response = await updateReq(`tasks/update/${id}`, body);
-      return response;
+      if (task) {
+        const body = {
+          title: title,
+          description: description,
+          concluded: task.concluded,
+        };
+        const response = await updateReq<TaskToSend>(
+          `tasks/update/${id}`,
+          body
+        );
+        return response;
+      }
     } else {
-      alert("You must give your task a title!")
+      alert("You must give your task a title!");
     }
   }
 
   useEffect(() => {
     const idParam = searchParams.get("id");
-    fetchItem(`tasks/listById/${idParam}`, setTask);
+    fetchItem<TaskType>(`tasks/listById/${idParam}`, setTask);
   }, [searchParams]);
 
   useEffect(() => {

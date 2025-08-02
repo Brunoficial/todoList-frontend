@@ -5,6 +5,12 @@ import Input from "../components/Input";
 import { useState } from "react";
 import { createReq } from "../services/apiService";
 
+export interface TaskToSend {
+    title: string,
+    description: string,
+    concluded: boolean
+  }
+
 export default function AddTaskPage() {
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
@@ -18,7 +24,7 @@ export default function AddTaskPage() {
         concluded: false,
       };
 
-      createReq("tasks/create", body);
+      createReq<TaskToSend>("tasks/create", body);
       setDescription("");
       setTitle("");
     } else {

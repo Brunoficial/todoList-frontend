@@ -1,64 +1,36 @@
 import type { AxiosResponse } from "axios";
 import api from "./api";
 
-
-export async function getReq(url:string): Promise<AxiosResponse> {
-  try {
+export async function getReq(url: string): Promise<AxiosResponse> {
     const response = await api.get(url);
-    return response
-
-  } catch (error) {
-    return error;
-  }
+    return response;
 }
 
-export async function createReq(url:string, data:any): Promise<AxiosResponse> {
-  try {
-    const response = await api.post(url, {
-      title: data.title,
-      description: data.description,
-    });
-
+export async function createReq<T>(
+  url: string,
+  data: T
+): Promise<AxiosResponse> {
+    const response = await api.post(url, data);
     return response;
-
-  } catch (error) {
-    return error;
-  }
 }
 
 // This url needs an Id as a parameter
-export async function getByIdReq(url:string): Promise<AxiosResponse> {
-  try {
+export async function getByIdReq(url: string): Promise<AxiosResponse> {
     const response = await api.get(url);
-    return response
-  } catch(error) {
-    return error
-  }
+    return response;
 }
 
 // This url needs to have Id as a parameter
-export async function deleteReq(url:string): Promise<AxiosResponse> {
-  try {
-    const response = await api.delete(url)
-    return response
-
-  } catch (error) { 
-      return error
-  }
+export async function deleteReq(url: string): Promise<AxiosResponse> {
+    const response = await api.delete(url);
+    return response;
 }
 
 // This url needs to have Id as a parameter
-export async function updateReq(url:string, data:any): Promise<AxiosResponse> {
-  try {
-    const response = await api.patch(url, {
-      title: data.title,
-      description: data.description,
-      concluded: data.concluded
-    })
-
-    return response
-
-  } catch(error) {
-    return error
-  }
+export async function updateReq<T>(
+  url: string,
+  data: T
+): Promise<AxiosResponse> {
+    const response = await api.patch(url, data);
+    return response;
 }

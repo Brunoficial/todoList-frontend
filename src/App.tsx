@@ -10,10 +10,6 @@ import { Icons } from "./assets/icons";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-
-// Services
-import { getReq } from "./services/apiService";
-
 // Utils 
 import { fetchItems } from "./utils";
 
@@ -31,7 +27,7 @@ function App() {
 
   const [tasks, setTasks] = useState<TaskType[]>([]);
   useEffect(() => {
-    fetchItems("tasks/list", setTasks);
+    fetchItems<TaskType[]>("tasks/list", setTasks);
   }, [tasks]);
 
   return (
