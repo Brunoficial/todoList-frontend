@@ -14,6 +14,9 @@ import { useNavigate } from "react-router-dom";
 // Services
 import { getReq } from "./services/apiService";
 
+// Utils 
+import { fetchItems } from "./utils";
+
 export interface TaskType {
   id: number;
   title: string;
@@ -28,14 +31,7 @@ function App() {
 
   const [tasks, setTasks] = useState<TaskType[]>([]);
   useEffect(() => {
-    async function fetchTasks() {
-      const {data, status} = await getReq("tasks/list");
-      if (status==200) {
-        setTasks(data);
-      }
-    } 
-
-    fetchTasks();
+    fetchItems("tasks/list", setTasks);
   }, [tasks]);
 
   return (
