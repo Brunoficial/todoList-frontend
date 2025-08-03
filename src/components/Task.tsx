@@ -1,8 +1,9 @@
 import { Icons } from "../assets/icons";
 import { useState } from "react";
 import { type TaskType } from "../App";
-import { deleteReq } from "../services/apiService";
+import { deleteReq, updateReq } from "../services/apiService";
 import { useNavigate } from "react-router-dom";
+import type { TaskToSend } from "../pages/AddTaskPage";
 
 interface TaskComponentProps {
   task: TaskType;
@@ -21,8 +22,14 @@ export default function Task({ task, darkTheme }: TaskComponentProps) {
   const [taskConcluded, setTaskConcluded] = useState(task.concluded);
 
   function onTaskStateClick(taskConcluded: boolean) {
+    const body = {
+      title: task.title,
+      description: task.description,
+      concluded: !(task.concluded)
+    }
     setTaskConcluded(!taskConcluded);
-    task.concluded = !task.concluded;
+    const response = updateReq<TaskToSend>(`tasks/update/${task.id}`, body)
+    return response
   }
 
   function onEditClick() {
