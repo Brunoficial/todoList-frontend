@@ -27,6 +27,7 @@ export default function AddTaskPage() {
       createReq<TaskToSend>("tasks/create", body);
       setDescription("");
       setTitle("");
+      alert("Task created!")
     } else {
       alert("You must write a title for your task"); 
     }

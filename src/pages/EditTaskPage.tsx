@@ -37,6 +37,7 @@ export default function EditTaskPage() {
           `tasks/update/${id}`,
           body
         );
+        alert("Task edited!")
         return response;
       }
     } else {
