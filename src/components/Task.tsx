@@ -1,9 +1,9 @@
 import { Icons } from "../assets/icons";
 import { useState } from "react";
 import { type TaskType } from "../App";
-import { deleteReq, updateReq } from "../services/apiService";
-import { useNavigate } from "react-router-dom";
 import type { TaskToSend } from "../pages/AddTaskPage";
+import TaskDescriptionPopover from "./TaskDescriptionPopover";
+import { updateReq } from "../services/apiService";
 
 interface TaskComponentProps {
   task: TaskType;
@@ -11,8 +11,6 @@ interface TaskComponentProps {
 }
 
 export default function Task({ task, darkTheme }: TaskComponentProps) {
-
-  const navigate = useNavigate()
 
   const [showTaskDetails, setShowTaskDetails] = useState(false);
   function onTaskClick(showTaskDetails: boolean) {
@@ -32,19 +30,12 @@ export default function Task({ task, darkTheme }: TaskComponentProps) {
     return response
   }
 
-  function onEditClick() {
-    const query = new URLSearchParams();
-    query.set("id", (task.id).toString());
-
-    navigate(`/edit/?${query.toString()}`)    
-  }
-
   return (
-    <div className="task flex flex-col gap-4 w-full">
+    <div className="task flex flex-col justify-center gap-4 w-full">
       <div className="taskText flex items-center gap-5 px-2">
         <button
           onClick={() => onTaskStateClick(taskConcluded)}
-          className={`flex items-center justify-center hover:cursor-pointer hover:border-2 border-1 border-lightThemeEmphasis w-[24px] h-[24px]  ${
+          className={`flex items-center justify-center hover:cursor-pointer hover:border-2 border-1 border-lightThemeEmphasis w-6 h-6 ${
             task.concluded ? "bg-lightThemeEmphasis" : ""
           }`}
         >
@@ -61,6 +52,8 @@ export default function Task({ task, darkTheme }: TaskComponentProps) {
           {task.title}
         </button>
       </div>
+      <TaskDescriptionPopover task={task} showTaskDetails={showTaskDetails} setShowTaskDetails={setShowTaskDetails}/>
+      {/*}
       <div
         className={`task-details flex flex-col gap-y-4 px-2 duration-1000 ${
           showTaskDetails ? "" : "hidden"
@@ -76,14 +69,14 @@ export default function Task({ task, darkTheme }: TaskComponentProps) {
         </p> 
         : ""}
 
-        <div className="flex items-center gap-2 text-[12px]">
+        <div className="flex items-center gap-2">
           <button
             onClick={() => deleteReq(`tasks/delete/${task.id}`)}
             className={`${
               darkTheme
                 ? "text-lightThemeEmphasis hover:text-red-600"
                 : "text-lightThemeEmphasis hover:text-red-400"
-            } duration-1000 text-[12px] hover:cursor-pointer`}
+            } duration-1000 text-[] hover:cursor-pointer`}
           >
             Delete
           </button>
@@ -100,6 +93,7 @@ export default function Task({ task, darkTheme }: TaskComponentProps) {
           </button>
         </div>
       </div>
+      {*/}
       <hr className="text-gray border-1" />
     </div>
   );

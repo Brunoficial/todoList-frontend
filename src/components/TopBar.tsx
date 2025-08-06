@@ -18,7 +18,7 @@ export default function TopBar({
       <div
         className={`${
           darkTheme ? "border-white text-white" : "border-black"
-        } flex border-2 px-4 py-1 gap-4 w-3xl rounded-[4px] duration-1000`}
+        } flex border-2 px-4 py-1 gap-4 w-3xl rounded-1 duration-1000`}
       >
         {darkTheme ? <Icons.SearchBarWhite /> : <Icons.Searchbar />}
         <input

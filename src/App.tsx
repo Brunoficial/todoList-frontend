@@ -34,12 +34,12 @@ function App() {
     <div
       className={`${
         darkTheme ? "bg-darkThemebody" : "bg-lightThemebody"
-      } flex flex-col items-center py-24 px-4 w-full h-full duration-1000`}
+      } flex flex-col items-center py-24 px-4 min-h-screen duration-1000`}
     >
       <div
         className={`${
           darkTheme ? "bg-darkThemeContainer" : "bg-white"
-        } relative flex flex-col items-center h-[824px] w-[1000px] rounded-[4px] py-10 px-25 shadow-2xl duration-1000`}
+        } relative flex flex-col items-center h-auto rounded-1 py-10 px-25 shadow-2xl duration-1000`}
       >
         <Title darkTheme={darkTheme}>TO-DO LIST</Title>
         <TopBar
@@ -54,7 +54,7 @@ function App() {
           onClick={() => navigate("/addTask")}
           className={`${
             darkTheme ? "bg-darkThemeEmpahis" : "bg-lightThemeEmphasis"
-          } mt-[80px] flex items-center justify-center rounded-[4px] shadow-2xl px-2 py-2 hover:cursor-pointer hover:bg-black duration-1000`}
+          } mt-20 flex items-center justify-center rounded-1 shadow-2xl px-2 py-2 hover:cursor-pointer hover:bg-black duration-1000`}
         >
           <Icons.Plus />
         </button>

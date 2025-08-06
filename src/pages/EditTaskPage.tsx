@@ -26,22 +26,18 @@ export default function EditTaskPage() {
   const [task, setTask] = useState<TaskType | null>(null);
 
   async function OnEditClick(id: number): Promise<AxiosResponse | void> {
-    if (title.trim() !== "") {
-      if (task) {
-        const body = {
-          title: title,
-          description: description,
-          concluded: task.concluded,
-        };
-        const response = await updateReq<TaskToSend>(
-          `tasks/update/${id}`,
-          body
-        );
-        alert("Task edited!")
-        return response;
-      }
-    } else {
+    if (title.trim() == "") {
       alert("You must give your task a title!");
+      
+    } else if (task) {
+      const body = {
+        title: title,
+        description: description,
+        concluded: task.concluded,
+      };
+      const response = await updateReq<TaskToSend>(`tasks/update/${id}`, body);
+      alert("Task edited!");
+      return response;
     }
   }
 
