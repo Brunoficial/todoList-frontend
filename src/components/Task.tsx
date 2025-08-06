@@ -2,7 +2,7 @@ import { Icons } from "../assets/icons";
 import { useState } from "react";
 import { type TaskType } from "../App";
 import type { TaskToSend } from "../pages/AddTaskPage";
-import TaskDescriptionPopover from "./TaskDescriptionPopover";
+import TaskDetailsPopover from "./TaskDescriptionPopover";
 import { updateReq } from "../services/apiService";
 
 interface TaskComponentProps {
@@ -11,7 +11,6 @@ interface TaskComponentProps {
 }
 
 export default function Task({ task, darkTheme }: TaskComponentProps) {
-
   const [showTaskDetails, setShowTaskDetails] = useState(false);
   function onTaskClick(showTaskDetails: boolean) {
     setShowTaskDetails(!showTaskDetails);
@@ -23,11 +22,11 @@ export default function Task({ task, darkTheme }: TaskComponentProps) {
     const body = {
       title: task.title,
       description: task.description,
-      concluded: !(task.concluded)
-    }
+      concluded: !task.concluded,
+    };
     setTaskConcluded(!taskConcluded);
-    const response = updateReq<TaskToSend>(`tasks/update/${task.id}`, body)
-    return response
+    const response = updateReq<TaskToSend>(`tasks/update/${task.id}`, body);
+    return response;
   }
 
   return (
@@ -52,7 +51,11 @@ export default function Task({ task, darkTheme }: TaskComponentProps) {
           {task.title}
         </button>
       </div>
-      <TaskDescriptionPopover task={task} showTaskDetails={showTaskDetails} setShowTaskDetails={setShowTaskDetails}/>
+      <TaskDetailsPopover
+        task={task}
+        showTaskDetails={showTaskDetails}
+        setShowTaskDetails={setShowTaskDetails}
+      />
       {/*}
       <div
         className={`task-details flex flex-col gap-y-4 px-2 duration-1000 ${

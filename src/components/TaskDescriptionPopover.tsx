@@ -3,6 +3,7 @@ import type { TaskType } from "../App";
 import Title from "./Title";
 import { useNavigate } from "react-router-dom";
 import { deleteReq } from "../services/apiService";
+import { Icons } from "../assets/icons";
 
 interface TaskDescriptionPopoverProps {
   task: TaskType;
@@ -10,7 +11,7 @@ interface TaskDescriptionPopoverProps {
   setShowTaskDetails: React.Dispatch<SetStateAction<boolean>>;
 }
 
-export default function TaskDescriptionPopover({
+export default function TaskDetailsPopover({
   task,
   showTaskDetails,
   setShowTaskDetails,
@@ -26,30 +27,30 @@ export default function TaskDescriptionPopover({
 
   return (
     <div
-      className={`absolute  left-0 top-0 w-full h-full bg-black/50 z-0 ${
-        showTaskDetails ? "" : "hidden"
+      className={`absolute  left-0 top-0 w-full h-full bg-black/50 z-0 transition-all ${
+        showTaskDetails ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
       } `}
     >
       <div
-        className={`flex flex-col relative top-1/2 left-1/2 -translate-1/2 w-2xl items-center justify-center bg-white opacity-100 rounded-[10px] px-8 py-4 shadow-2xl z-50 ${
-          showTaskDetails ? "" : "hidden"
+        className={`flex flex-col relative top-1/2 left-1/2 -translate-1/2 w-2xl items-center justify-center transition-all ease-in-out bg-white rounded-[10px] px-8 py-6 shadow-2xl z-50 ${
+          showTaskDetails ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
       >
         <Title darkTheme={false}>{task.title}</Title>
-        <p className="text-wrap mb-10">{task.description}</p>
+        <p className="text-wrap mb-30">{task.description}</p>
 
-        <div className="flex gap-x-2">
-          <button onClick={() => onEditClick()}>editar</button>
-          /
-          <button onClick={() => deleteReq(`tasks/delete/${task.id}`)}>deletar</button>
+        <div className="flex gap-x-10">
+          <button className="cursor-pointer" onClick={() => onEditClick()}><Icons.Pencil/></button>
+          
+          <button className="cursor-pointer" onClick={() => deleteReq(`tasks/delete/${task.id}`)}><Icons.Trash/></button>
         </div>
         <button
-          className="absolute right-2 top-2"
+          className="absolute right-3 top-2 cursor-pointer"
           onClick={() => {
             setShowTaskDetails(!showTaskDetails);
           }}
         >
-          X
+          <Icons.Close/>
         </button>
       </div>
     </div>

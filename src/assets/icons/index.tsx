@@ -16,7 +16,7 @@ export const Icons = {
       />
     </svg>
   ),
-  SearchBarWhite: ({width="24px", height="24px"}) => (
+  SearchBarWhite: ({ width = "24px", height = "24px" }) => (
     <svg
       width={width}
       height={height}
@@ -119,6 +119,48 @@ export const Icons = {
         stroke-width="4"
         stroke-linecap="round"
         stroke-linejoin="round"
+      />
+    </svg>
+  ),
+  Trash: ({ width = "24px", height = "24px" }) => (
+    <svg
+      width={width}
+      height={height}
+      viewBox="0 0 32 32"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M9.3335 28C8.60016 28 7.97238 27.7389 7.45016 27.2167C6.92794 26.6944 6.66683 26.0667 6.66683 25.3333V8H5.3335V5.33333H12.0002V4H20.0002V5.33333H26.6668V8H25.3335V25.3333C25.3335 26.0667 25.0724 26.6944 24.5502 27.2167C24.0279 27.7389 23.4002 28 22.6668 28H9.3335ZM12.0002 22.6667H14.6668V10.6667H12.0002V22.6667ZM17.3335 22.6667H20.0002V10.6667H17.3335V22.6667Z"
+        fill="#1D1B20"
+      />
+    </svg>
+  ),
+  Pencil: ({ width = "24px", height = "24px" }) => (
+    <svg
+      width={width}
+      height={height}
+      viewBox="0 0 32 32"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M4 28V22.3333L21.6 4.76667C21.8667 4.52222 22.1611 4.33333 22.4833 4.2C22.8056 4.06667 23.1444 4 23.5 4C23.8556 4 24.2 4.06667 24.5333 4.2C24.8667 4.33333 25.1556 4.53333 25.4 4.8L27.2333 6.66667C27.5 6.91111 27.6944 7.2 27.8167 7.53333C27.9389 7.86667 28 8.2 28 8.53333C28 8.88889 27.9389 9.22778 27.8167 9.55C27.6944 9.87222 27.5 10.1667 27.2333 10.4333L9.66667 28H4ZM23.4667 10.4L25.3333 8.53333L23.4667 6.66667L21.6 8.53333L23.4667 10.4Z"
+        fill="#1D1B20"
+      />
+    </svg>
+  ),
+  Close: ({ width="24px", height="24px" }) => (
+    <svg
+      width={width}
+      height={height}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M6.4 19L5 17.6L10.6 12L5 6.4L6.4 5L12 10.6L17.6 5L19 6.4L13.4 12L19 17.6L17.6 19L12 13.4L6.4 19Z"
+        fill="#6750A4"
       />
     </svg>
   ),
