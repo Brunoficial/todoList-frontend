@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 
 // Utils 
 import { fetchItems } from "./utils";
+import AddTaskComponent from "./components/AddTaskComponent";
 
 export interface TaskType {
   id: number;
@@ -24,6 +25,7 @@ function App() {
   const navigate = useNavigate();
   const [serchValue, setSearchValue] = useState("");
   const [darkTheme, setDarkTheme] = useState(false);
+  const [showAddTask, setShowAddTask] = useState(false)
 
   const [tasks, setTasks] = useState<TaskType[]>([]);
   useEffect(() => {
@@ -48,6 +50,8 @@ function App() {
           darkTheme={darkTheme}
           setDarkTheme={setDarkTheme}
         />
+        <button className={`${showAddTask? "hidden" : ""}`} onClick={() => setShowAddTask(!showAddTask)}>mostrar</button>
+        <AddTaskComponent showAddTaskComponent={showAddTask} setShowAddTaskComponent={setShowAddTask}/>
         <Tasks tasks={tasks} darkTheme={darkTheme} />
 
         <button
