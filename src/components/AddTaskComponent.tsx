@@ -16,16 +16,23 @@ export default function AddTaskComponent({
   const [description, setDescription] = useState("");
 
   return (
-    <div className={`flex flex-col mb-10 items-center justify-center gap-y-8 ${showAddTaskComponent ? "" : "hidden"}`}>
+    <div
+      className={`flex flex-col mb-10 items-center justify-center gap-y-8 border-1 p-6 ${
+        showAddTaskComponent ? "" : "hidden"
+      }`}
+    >
       <p className="font-poppins font-bold text-[32px]">Add a task</p>
-      <Input value={title} setValue={setTitle} child="Titulo: " />
-      <Input
-        value={description}
-        setValue={setDescription}
-        child="Description: "
-      />
+      <div className="flex flex-col gap-5">
+        <Input value={title} setValue={setTitle} child="Titulo: " />
+        <Input
+          value={description}
+          setValue={setDescription}
+          child="Description: "
+        />
+      </div>
+
       <button onClick={() => setShowAddTaskComponent(!showAddTaskComponent)}>
-        <Icons.Close/>
+        <Icons.Close />
       </button>
     </div>
   );

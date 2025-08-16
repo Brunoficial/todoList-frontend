@@ -4,6 +4,7 @@ import Title from "./Title";
 import { useNavigate } from "react-router-dom";
 import { deleteReq } from "../services/apiService";
 import { Icons } from "../assets/icons";
+import Popover from "./Popover";
 
 interface TaskDescriptionPopoverProps {
   task: TaskType;
@@ -26,6 +27,18 @@ export default function TaskDetailsPopover({
   }
 
   return (
+    <Popover showPopover={showTaskDetails} setShowPopover={setShowTaskDetails}>
+        <Title darkTheme={false}>{task.title}</Title>
+        <p className="text-wrap mb-30">{task.description}</p>
+
+        <div className="flex gap-x-10">
+          <button className="cursor-pointer" onClick={() => onEditClick()}><Icons.Pencil/></button>
+          
+          <button className="cursor-pointer" onClick={() => deleteReq(`tasks/delete/${task.id}`)}><Icons.Trash/></button>
+        </div>
+    </Popover>
+
+  );{/*}
     <div
       className={`absolute  left-0 top-0 w-full h-full bg-black/50 z-0 transition-all ${
         showTaskDetails ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
@@ -54,5 +67,5 @@ export default function TaskDetailsPopover({
         </button>
       </div>
     </div>
-  );
+    {*/}
 }
