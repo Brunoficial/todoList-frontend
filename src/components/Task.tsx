@@ -56,47 +56,6 @@ export default function Task({ task, darkTheme }: TaskComponentProps) {
         showTaskDetails={showTaskDetails}
         setShowTaskDetails={setShowTaskDetails}
       />
-      {/*}
-      <div
-        className={`task-details flex flex-col gap-y-4 px-2 duration-1000 ${
-          showTaskDetails ? "" : "hidden"
-        }`}
-      >
-        {task.description? 
-        <p
-          className={`${
-            darkTheme ? "text-white" : "text-black"
-          } duration-1000 overflow-x-hidden w-full h-fit outline-0 font-poppins`}
-        >
-          {task.description}
-        </p> 
-        : ""}
-
-        <div className="flex items-center gap-2">
-          <button
-            onClick={() => deleteReq(`tasks/delete/${task.id}`)}
-            className={`${
-              darkTheme
-                ? "text-lightThemeEmphasis hover:text-red-600"
-                : "text-lightThemeEmphasis hover:text-red-400"
-            } duration-1000 text-[] hover:cursor-pointer`}
-          >
-            Delete
-          </button>
-          <p>/</p>
-          <button
-            onClick={() => onEditClick()}
-            className={`${
-              darkTheme
-                ? "text-lightThemeEmphasis hover:text-red-600"
-                : "text-lightThemeEmphasis hover:text-yellow-400"
-            } duration-1000 text-[12px] hover:cursor-pointer`}
-          >
-            Edit
-          </button>
-        </div>
-      </div>
-      {*/}
       <hr className="text-gray border-1" />
     </div>
   );

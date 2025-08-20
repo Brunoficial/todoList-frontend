@@ -54,7 +54,7 @@ function App() {
           onClick={() => setShowAddTask(!showAddTask)}
           className={`${
             darkTheme ? "bg-darkThemeEmpahis" : "bg-lightThemeEmphasis"
-          } mt-20 flex items-center justify-center rounded-1 shadow-2xl px-2 py-2 hover:cursor-pointer hover:bg-black duration-1000`}
+          } mt-20 flex items-center justify-center rounded-[10px] shadow-2xl px-2 py-2 hover:cursor-pointer hover:bg-black duration-1000`}
         >
           <Icons.Plus />
         </button>

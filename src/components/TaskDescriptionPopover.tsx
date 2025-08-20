@@ -1,10 +1,11 @@
-import type { SetStateAction } from "react";
+import { useState, type SetStateAction } from "react";
 import type { TaskType } from "../App";
 import Title from "./Title";
-import { useNavigate } from "react-router-dom";
-import { deleteReq } from "../services/apiService";
+import { deleteReq, updateReq } from "../services/apiService";
 import { Icons } from "../assets/icons";
 import Popover from "./Popover";
+import type { AxiosResponse } from "axios";
+import type { TaskToSend } from "../pages/AddTaskPage";
 
 interface TaskDescriptionPopoverProps {
   task: TaskType;
@@ -17,55 +18,82 @@ export default function TaskDetailsPopover({
   showTaskDetails,
   setShowTaskDetails,
 }: TaskDescriptionPopoverProps) {
-  const navigate = useNavigate();
+  
+  const [editTask, setEditTask] = useState(false);
+  const [title, setTitle] = useState(task.title);
+  const [description, setDescription] = useState(task.description);
 
-  function onEditClick() {
-    const query = new URLSearchParams();
-    query.set("id", task.id.toString());
-
-    navigate(`/edit/?${query.toString()}`);
+  async function OnEditClick(id: number): Promise<AxiosResponse | void> {
+    if (title.trim() == "") {
+      alert("You must give your task a title!");
+    } else if (task) {
+      const body = {
+        title: title,
+        description: description,
+        concluded: task.concluded,
+      };
+      const response = await updateReq<TaskToSend>(`tasks/update/${id}`, body);
+      alert("Task edited!");
+      return response;
+    }
   }
 
   return (
     <Popover showPopover={showTaskDetails} setShowPopover={setShowTaskDetails}>
+      <div className={`${editTask ? "hidden" : ""}`}>
         <Title darkTheme={false}>{task.title}</Title>
-        <p className="text-wrap mb-30">{task.description}</p>
-
-        <div className="flex gap-x-10">
-          <button className="cursor-pointer" onClick={() => onEditClick()}><Icons.Pencil/></button>
-          
-          <button className="cursor-pointer" onClick={() => deleteReq(`tasks/delete/${task.id}`)}><Icons.Trash/></button>
-        </div>
-    </Popover>
-
-  );{/*}
-    <div
-      className={`absolute  left-0 top-0 w-full h-full bg-black/50 z-0 transition-all ${
-        showTaskDetails ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
-      } `}
-    >
-      <div
-        className={`flex flex-col relative top-1/2 left-1/2 -translate-1/2 w-2xl items-center justify-center transition-all ease-in-out bg-white rounded-[10px] px-8 py-6 shadow-2xl z-50 ${
-          showTaskDetails ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+      </div>
+      <input
+        type="text"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        className={`font-poppins font-semibold text-4xl mb-10 duration-1000 text-center outline-0 ${
+          editTask ? "" : "hidden"
         }`}
-      >
-        <Title darkTheme={false}>{task.title}</Title>
-        <p className="text-wrap mb-30">{task.description}</p>
+      />
+      <div className={`${editTask ? "hidden" : ""}`}>
+        <p className="break-words mb-30 max-w-full">{task.description}</p>
+      </div>
+      <input
+        type="text"
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+        className={`break-words mb-30 max-w-full text-center outline-0 ${
+          editTask ? "" : "hidden"
+        }`}
+      />
 
-        <div className="flex gap-x-10">
-          <button className="cursor-pointer" onClick={() => onEditClick()}><Icons.Pencil/></button>
-          
-          <button className="cursor-pointer" onClick={() => deleteReq(`tasks/delete/${task.id}`)}><Icons.Trash/></button>
-        </div>
+      <div className="flex gap-x-10 mb-5">
         <button
-          className="absolute right-3 top-2 cursor-pointer"
+          className="cursor-pointer"
           onClick={() => {
-            setShowTaskDetails(!showTaskDetails);
-          }}
+            setEditTask(!editTask)
+            setTitle(task.title)
+            setDescription(task.description
+            )
+          }}  
         >
-          <Icons.Close/>
+          <Icons.Pencil />
+        </button>
+
+        <button
+          className="cursor-pointer"
+          onClick={() => deleteReq(`tasks/delete/${task.id}`)}
+        >
+          <Icons.Trash />
         </button>
       </div>
-    </div>
-    {*/}
+      <button
+        onClick={() => {
+          OnEditClick(task.id)
+           
+        }}
+        className={`${
+          editTask ? "" : "hidden"
+        } bg-lightThemeEmphasis text-white font-bold rounded-[8px] py-1 px-2 hover:bg-black hover:cursor-pointer duration-400`}
+      >
+        Save
+      </button>
+    </Popover>
+  );
 }

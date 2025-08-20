@@ -36,8 +36,9 @@ export default function AddTaskPopover({ showAddTask, setShowAddTask }: AddTaskP
     <Popover showPopover={showAddTask} setShowPopover={setShowAddTask}>
       <Title darkTheme={false}>Add a task</Title>
       <div className="flex flex-col gap-5 mb-10">
-        <Input value={title} setValue={setTitle} child="Titulo: " />
+        <Input maxLength={20} value={title} setValue={setTitle} child="Title: " />
         <Input
+          maxLength={100}
           value={description}
           setValue={setDescription}
           child="Description: "

@@ -17,7 +17,7 @@ export default function Popover({ showPopover, setShowPopover, children }: Popov
       } `}
     >
       <div
-        className={`flex flex-col relative top-1/2 left-1/2 -translate-1/2 w-2xl items-center justify-between transition-all ease-in-out bg-white rounded-[10px] px-8 py-6 shadow-2xl z-50 ${
+        className={`flex flex-col relative top-1/2 left-1/2 -translate-1/2 w-2xl items-center justify-center text-center transition-all ease-in-out bg-white rounded-[10px] px-8 py-6 shadow-2xl z-50 ${
           showPopover
             ? "opacity-100 pointer-events-auto"
             : "opacity-0 pointer-events-none"
