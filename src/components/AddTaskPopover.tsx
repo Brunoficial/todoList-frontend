@@ -4,39 +4,48 @@ import Popover from "./Popover";
 import Title from "./Title";
 import Input from "./Input";
 import { createReq } from "../services/apiService";
-import type { TaskToSend } from "../pages/AddTaskPage";
+import type { TaskToSend } from "../App";
 
 interface AddTaskPopoverProps {
   showAddTask: boolean;
   setShowAddTask: React.Dispatch<SetStateAction<boolean>>;
 }
 
-export default function AddTaskPopover({ showAddTask, setShowAddTask }: AddTaskPopoverProps) {
+export default function AddTaskPopover({
+  showAddTask,
+  setShowAddTask,
+}: AddTaskPopoverProps) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
-  function onAddClick() {
-      if (title.trim() !== "") {
-        const body = {
-          title: title,
-          description: description,
-          concluded: false,
-        };
-  
-        createReq<TaskToSend>("tasks/create", body);
+  async function onAddClick(url: string, body: TaskToSend) {
+    if (title.trim() !== "") {
+
+      const { status } = await createReq<TaskToSend>(url, body);
+
+      if (status === 200) {
         setDescription("");
         setTitle("");
-        alert("Task created!")
+        alert("Task created!");
+        return;
+
       } else {
-        alert("You must write a title for your task"); 
+        alert("An unknown error ocurred when trying to create a task!");
       }
-    }  
+      alert("You must write a title for your task");
+    }
+  }
 
   return (
     <Popover showPopover={showAddTask} setShowPopover={setShowAddTask}>
       <Title darkTheme={false}>Add a task</Title>
       <div className="flex flex-col gap-5 mb-10">
-        <Input maxLength={20} value={title} setValue={setTitle} child="Title: " />
+        <Input
+          maxLength={20}
+          value={title}
+          setValue={setTitle}
+          child="Title: "
+        />
         <Input
           maxLength={100}
           value={description}
@@ -44,7 +53,14 @@ export default function AddTaskPopover({ showAddTask, setShowAddTask }: AddTaskP
           child="Description: "
         />
       </div>
-      <button className="px-2 py-1 bg-lightThemeEmphasis text-white font-bold rounded-[10px] hover:bg-black duration-1000 hover:cursor-pointer" onClick={() => onAddClick()}>
+      <button
+        className="px-2 py-1 bg-lightThemeEmphasis text-white font-bold rounded-[10px] hover:bg-black duration-1000 hover:cursor-pointer"
+        onClick={() => onAddClick(`tasks/create`, {
+          title: title,
+          description: description,
+          concluded: false
+        })}
+      >
         Send
       </button>
     </Popover>

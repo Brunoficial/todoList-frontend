@@ -20,6 +20,12 @@ export interface TaskType {
   concluded: boolean;
 }
 
+export interface TaskToSend {
+    title: string,
+    description: string,
+    concluded: boolean
+  }
+
 function App() {
   const [serchValue, setSearchValue] = useState("");
   const [darkTheme, setDarkTheme] = useState(false);

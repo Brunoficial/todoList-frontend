@@ -1,7 +1,7 @@
 import { Icons } from "../assets/icons";
 import { useState } from "react";
 import { type TaskType } from "../App";
-import type { TaskToSend } from "../pages/AddTaskPage";
+import type { TaskToSend } from "../App";
 import TaskDetailsPopover from "./TaskDescriptionPopover";
 import { updateReq } from "../services/apiService";
 

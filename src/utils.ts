@@ -1,5 +1,5 @@
 // API
-import { getByIdReq, getReq } from "./services/apiService";
+import {getByIdReq, getReq } from "./services/apiService";
 
 
 export async function fetchItems<T>(url:string, setValue:React.Dispatch<React.SetStateAction<T>>) {
@@ -15,5 +15,4 @@ export async function fetchItem<T>(url:string, setValue:React.Dispatch<React.Set
     setValue(data)
   }
 }
-
 

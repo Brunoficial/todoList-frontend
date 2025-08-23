@@ -4,8 +4,7 @@ import Title from "./Title";
 import { deleteReq, updateReq } from "../services/apiService";
 import { Icons } from "../assets/icons";
 import Popover from "./Popover";
-import type { AxiosResponse } from "axios";
-import type { TaskToSend } from "../pages/AddTaskPage";
+import type { TaskToSend } from "../App";
 
 interface TaskDescriptionPopoverProps {
   task: TaskType;
@@ -18,23 +17,22 @@ export default function TaskDetailsPopover({
   showTaskDetails,
   setShowTaskDetails,
 }: TaskDescriptionPopoverProps) {
-  
   const [editTask, setEditTask] = useState(false);
   const [title, setTitle] = useState(task.title);
   const [description, setDescription] = useState(task.description);
 
-  async function OnEditClick(id: number): Promise<AxiosResponse | void> {
-    if (title.trim() == "") {
-      alert("You must give your task a title!");
-    } else if (task) {
-      const body = {
-        title: title,
-        description: description,
-        concluded: task.concluded,
-      };
-      const response = await updateReq<TaskToSend>(`tasks/update/${id}`, body);
+  async function OnEditClick(url: string, body: TaskToSend): Promise<void> {
+    if (body.title.trim() == "") {
+      alert("You must write a title for your task!");
+      return;
+    }
+
+    const { status } = await updateReq<TaskToSend>(url, body);
+
+    if (status === 200) {
       alert("Task edited!");
-      return response;
+    } else {
+      alert("An unknown error ocurred when trying to edit this task!");
     }
   }
 
@@ -46,6 +44,7 @@ export default function TaskDetailsPopover({
       <input
         type="text"
         value={title}
+        placeholder="Write a title.."
         onChange={(e) => setTitle(e.target.value)}
         className={`font-poppins font-semibold text-4xl mb-10 duration-1000 text-center outline-0 ${
           editTask ? "" : "hidden"
@@ -57,6 +56,7 @@ export default function TaskDetailsPopover({
       <input
         type="text"
         value={description}
+        placeholder="Write a description.."
         onChange={(e) => setDescription(e.target.value)}
         className={`break-words mb-30 max-w-full text-center outline-0 ${
           editTask ? "" : "hidden"
@@ -67,11 +67,10 @@ export default function TaskDetailsPopover({
         <button
           className="cursor-pointer"
           onClick={() => {
-            setEditTask(!editTask)
-            setTitle(task.title)
-            setDescription(task.description
-            )
-          }}  
+            setEditTask(!editTask);
+            setTitle(task.title);
+            setDescription(task.description);
+          }}
         >
           <Icons.Pencil />
         </button>
@@ -85,8 +84,11 @@ export default function TaskDetailsPopover({
       </div>
       <button
         onClick={() => {
-          OnEditClick(task.id)
-           
+          OnEditClick(`tasks/update/${task.id}`, {
+            title: title,
+            description: description,
+            concluded: task.concluded,
+          });
         }}
         className={`${
           editTask ? "" : "hidden"
