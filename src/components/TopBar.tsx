@@ -1,3 +1,4 @@
+// Assets
 import { Icons } from "../assets/icons/index";
 
 interface TopBarProps {

@@ -1,3 +1,4 @@
+// Interface
 import type { ReactNode } from "react"
 
 interface TitleProps {

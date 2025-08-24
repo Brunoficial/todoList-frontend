@@ -1,10 +1,17 @@
+// React
 import React, { type SetStateAction } from "react";
 import { useState } from "react";
+
+// Components
 import Popover from "./Popover";
 import Title from "./Title";
 import Input from "./Input";
+
+// Services
 import { createReq } from "../services/apiService";
-import type { TaskToSend } from "../App";
+
+// Interfaces
+import type { TaskDtoInterface } from "../pages/MainPage";
 
 interface AddTaskPopoverProps {
   showAddTask: boolean;
@@ -18,10 +25,10 @@ export default function AddTaskPopover({
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
-  async function onAddClick(url: string, body: TaskToSend) {
+  async function onAddClick(url: string, body: TaskDtoInterface) {
     if (title.trim() !== "") {
 
-      const { status } = await createReq<TaskToSend>(url, body);
+      const { status } = await createReq<TaskDtoInterface>(url, body);
 
       if (status === 200) {
         setDescription("");

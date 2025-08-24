@@ -1,12 +1,21 @@
+// Assets
 import { Icons } from "../assets/icons";
+
+// React
 import { useState } from "react";
-import { type TaskType } from "../App";
-import type { TaskToSend } from "../App";
+
+// Interfaces
+import type { TaskInterface } from "../pages/MainPage";
+import type { TaskDtoInterface } from "../pages/MainPage";
+
+// Components
 import TaskDetailsPopover from "./TaskDescriptionPopover";
+
+// Services
 import { updateReq } from "../services/apiService";
 
 interface TaskComponentProps {
-  task: TaskType;
+  task: TaskInterface;
   darkTheme: boolean;
 }
 
@@ -25,7 +34,7 @@ export default function Task({ task, darkTheme }: TaskComponentProps) {
       concluded: !task.concluded,
     };
     setTaskConcluded(!taskConcluded);
-    const response = updateReq<TaskToSend>(`tasks/update/${task.id}`, body);
+    const response = updateReq<TaskDtoInterface>(`tasks/update/${task.id}`, body);
     return response;
   }
 
@@ -34,7 +43,7 @@ export default function Task({ task, darkTheme }: TaskComponentProps) {
       <div className="taskText flex items-center gap-5 px-2">
         <button
           onClick={() => onTaskStateClick(taskConcluded)}
-          className={`flex items-center justify-center hover:cursor-pointer hover:border-2 border-1 border-lightThemeEmphasis w-6 h-6 ${
+          className={`flex items-center justify-center hover:cursor-pointer hover:bg-lightThemeEmphasis duration-300 border-1 border-lightThemeEmphasis w-6 h-6 ${
             task.concluded ? "bg-lightThemeEmphasis" : ""
           }`}
         >

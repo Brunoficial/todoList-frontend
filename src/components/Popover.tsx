@@ -1,4 +1,7 @@
+// React
 import React, { type SetStateAction } from "react";
+
+// Assets
 import { Icons } from "../assets/icons";
 
 interface PopoverProps {

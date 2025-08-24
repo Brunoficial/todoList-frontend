@@ -6,17 +6,17 @@ export async function getReq(url: string): Promise<AxiosResponse> {
     return response;
 }
 
+// This url needs an Id as a parameter
+export async function getByIdReq(url: string): Promise<AxiosResponse> {
+    const response = await api.get(url);
+    return response;
+}
+
 export async function createReq<T>(
   url: string,
   data: T
 ): Promise<AxiosResponse> {
     const response = await api.post(url, data);
-    return response;
-}
-
-// This url needs an Id as a parameter
-export async function getByIdReq(url: string): Promise<AxiosResponse> {
-    const response = await api.get(url);
     return response;
 }
 

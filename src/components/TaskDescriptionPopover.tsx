@@ -1,13 +1,23 @@
+// React
 import { useState, type SetStateAction } from "react";
-import type { TaskType } from "../App";
-import Title from "./Title";
+
+// Interfaces
+import type { TaskInterface } from "../pages/MainPage";
+import type { TaskDtoInterface } from "../pages/MainPage";
+
+// Services
 import { deleteReq, updateReq } from "../services/apiService";
+
+// Assets
 import { Icons } from "../assets/icons";
+
+// Components 
 import Popover from "./Popover";
-import type { TaskToSend } from "../App";
+import Title from "./Title";
+
 
 interface TaskDescriptionPopoverProps {
-  task: TaskType;
+  task: TaskInterface;
   showTaskDetails: boolean;
   setShowTaskDetails: React.Dispatch<SetStateAction<boolean>>;
 }
@@ -21,13 +31,13 @@ export default function TaskDetailsPopover({
   const [title, setTitle] = useState(task.title);
   const [description, setDescription] = useState(task.description);
 
-  async function OnEditClick(url: string, body: TaskToSend): Promise<void> {
+  async function OnEditClick(url: string, body: TaskDtoInterface): Promise<void> {
     if (body.title.trim() == "") {
       alert("You must write a title for your task!");
       return;
     }
 
-    const { status } = await updateReq<TaskToSend>(url, body);
+    const { status } = await updateReq<TaskDtoInterface>(url, body);
 
     if (status === 200) {
       alert("Task edited!");
@@ -50,6 +60,7 @@ export default function TaskDetailsPopover({
           editTask ? "" : "hidden"
         }`}
       />
+
       <div className={`${editTask ? "hidden" : ""}`}>
         <p className="break-words mb-30 max-w-full">{task.description}</p>
       </div>

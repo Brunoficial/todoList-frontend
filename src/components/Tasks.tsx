@@ -1,8 +1,11 @@
-import type { TaskType } from "../App";
+// Interfaces 
+import type { TaskInterface } from "../pages/MainPage";
+
+// Components 
 import Task from "./Task";
 
 interface TasksComponentProps {
-  tasks: TaskType[];
+  tasks: TaskInterface[];
   darkTheme: boolean;
 }
 
